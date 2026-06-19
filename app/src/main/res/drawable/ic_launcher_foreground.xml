@@ -1,0 +1,58 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    
+    <!-- Group centered and scaled within the 66dp safe zone (inside 108dp canvas) -->
+    <group
+        android:translateX="18"
+        android:translateY="18">
+        
+        <!-- Tactical Outer Crosshair Ring (72x72 canvas space) -->
+        <path
+            android:fillColor="#00000000"
+            android:strokeColor="#FFC107"
+            android:strokeWidth="2.5"
+            android:pathData="M36,36m-24,0a24,24 0 1,1 48,0a24,24 0 1,1 -48,0" />
+            
+        <!-- Crosshair ticks Outer lines -->
+        <path
+            android:fillColor="#00000000"
+            android:strokeColor="#FFC107"
+            android:strokeWidth="3.5"
+            android:strokeLineCap="round"
+            android:pathData="M36,4 L36,10 M36,62 L36,68 M4,36 L10,36 M62,36 L68,36" />
+            
+        <!-- Stylized Level 3 Military Helmet Silhouette -->
+        <!-- Helmet Base Dome -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:strokeColor="#12131C"
+            android:strokeWidth="1"
+            android:pathData="M36,15 C24,15 16,21 16,33 C16,42 18,48 21,54 L51,54 C54,48 56,42 56,33 C56,21 48,15 36,15 Z" />
+            
+        <!-- Visor Plate with level 3 grid/welding slots -->
+        <path
+            android:fillColor="#12131C"
+            android:pathData="M22,30 L50,30 L50,39 L22,39 Z" />
+            
+        <!-- Visor tactical grill slits -->
+        <path
+            android:fillColor="#FFC107"
+            android:pathData="M25,32 L27,32 L27,37 L25,37 Z M31,32 L33,32 L33,37 L31,37 Z M37,32 L39,32 L39,37 L37,37 Z M43,32 L45,32 L45,37 M43,37 Z" />
+            
+        <!-- Helmet Chin Guard lower plates -->
+        <path
+            android:fillColor="#00000000"
+            android:strokeColor="#FFFFFF"
+            android:strokeWidth="2"
+            android:strokeLineJoin="round"
+            android:pathData="M21,54 L26,60 L46,60 L51,54" />
+
+        <!-- Accent Red Dot Laser in the absolute center -->
+        <path
+            android:fillColor="#FF5252"
+            android:pathData="M36,36m-2,0a2,2 0 1,1 4,0a2,2 0 1,1 -4,0" />
+    </group>
+</vector>

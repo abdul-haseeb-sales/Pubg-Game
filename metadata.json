@@ -1,0 +1,8 @@
+{
+  "name": "PUBG Companion",
+  "description": "A tactical battle royale companion with loadout comparisons, interactive hot-drop survival maps, and simulated combat profile stats tracking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
