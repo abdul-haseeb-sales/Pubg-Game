@@ -52,6 +52,8 @@ fun CompanionApp(viewModel: CompanionViewModel) {
     val userLevel by viewModel.userLevel.collectAsStateWithLifecycle()
     val levelProgress by viewModel.levelProgress.collectAsStateWithLifecycle()
 
+    var showTrainingWorkshop by remember { mutableStateOf(false) }
+
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
@@ -91,12 +93,26 @@ fun CompanionApp(viewModel: CompanionViewModel) {
                 label = "tab_fade_transition"
             ) { targetTab ->
                 when (targetTab) {
-                    AppTab.LOBBY -> LobbyTab(viewModel, bpCurrency, ucCurrency, userLevel, levelProgress)
+                    AppTab.LOBBY -> LobbyTab(
+                        viewModel = viewModel,
+                        bp = bpCurrency,
+                        uc = ucCurrency,
+                        lvl = userLevel,
+                        prog = levelProgress,
+                        onLaunchTrainingWorkshop = { showTrainingWorkshop = true }
+                    )
                     AppTab.ARMORY -> ArmoryTab(viewModel)
                     AppTab.MAP_TACTICS -> MapTacticsTab(viewModel)
                     AppTab.LOADOUTS -> LoadoutsTab(viewModel)
                     AppTab.STATS -> StatsTab(viewModel)
                 }
+            }
+
+            if (showTrainingWorkshop) {
+                TrainingWorkshopScreen(
+                    viewModel = viewModel,
+                    onClose = { showTrainingWorkshop = false }
+                )
             }
         }
     }
@@ -258,7 +274,8 @@ fun LobbyTab(
     bp: Int,
     uc: Int,
     lvl: Int,
-    prog: Float
+    prog: Float,
+    onLaunchTrainingWorkshop: () -> Unit
 ) {
     val selectedMap by viewModel.selectedMap.collectAsStateWithLifecycle()
     val isMatchmaking by viewModel.isMatchmaking.collectAsStateWithLifecycle()
@@ -505,6 +522,61 @@ fun LobbyTab(
                         modifier = Modifier.size(18.dp)
                     )
                 }
+            }
+
+            // Tactical Arcade Workshop launch card
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(SlateGrey.copy(alpha = 0.9f), RoundedCornerShape(16.dp))
+                    .border(1.dp, SolarYellow.copy(alpha = 0.25f), RoundedCornerShape(16.dp))
+                    .clickable { onLaunchTrainingWorkshop() }
+                    .padding(12.dp)
+                    .testTag("workshop_launcher_card"),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(40.dp)
+                            .background(GunmetalDark, RoundedCornerShape(8.dp))
+                            .border(1.dp, SolarYellow.copy(alpha = 0.3f), RoundedCornerShape(8.dp)),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.SportsEsports,
+                            contentDescription = "Arcade Workshop",
+                            tint = SolarYellow,
+                            modifier = Modifier.size(20.dp)
+                        )
+                    }
+                    Column {
+                        Text(
+                            text = "TRAINING FIELD ARCADE",
+                            color = Color.White,
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Black,
+                            letterSpacing = 1.sp
+                        )
+                        Text(
+                            text = "BUGGY CLIMB • COMBAT SHADOW DUEL",
+                            color = SolarYellow,
+                            fontSize = 9.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                }
+
+                Icon(
+                    imageVector = Icons.Default.PlayArrow,
+                    contentDescription = "Launch games",
+                    tint = OnSurfaceWhite,
+                    modifier = Modifier.size(20.dp)
+                )
             }
 
             // Big tactical Start Button
